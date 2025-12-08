@@ -1,0 +1,25 @@
+{
+  "name": "lg-web-starter-kit",
+  "version": "1.0.0",
+  "description": "A modern, unified 2D/3D starter kit for Liquid Galaxy web development",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "keywords": [
+    "liquid-galaxy",
+    "web",
+    "visualizer"
+  ],
+  "author": "Victor Sanchez Belmar - GDE in WebTechnologies and Senior Liquid Galaxy Mentor",
+  "license": "MIT"
+}
