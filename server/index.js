@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { SnakeGame } from './games/snake.js';
 
 // --- Configuration ---
 const PORT = process.argv[2] || 3000;
@@ -65,6 +66,7 @@ app.get('/', (req, res) => res.redirect('/controller')); // Default to controlle
 app.get('/2d', (req, res) => res.sendFile(path.join(PUBLIC_PATH, '2d/index.html')));
 app.get('/3d', (req, res) => res.sendFile(path.join(PUBLIC_PATH, '3d/index.html')));
 app.get('/controller', (req, res) => res.sendFile(path.join(PUBLIC_PATH, 'controller/index.html')));
+app.get('/snake', (req, res) => res.sendFile(path.join(PUBLIC_PATH, 'snake/index.html')));
 
 // --- Game State ---
 // World dimensions are now defined dynamically above based on SCREENS config.
@@ -84,6 +86,10 @@ let gameState = {
   camera: { x: 0, y: 0, z: 0 } // Synced camera look-at position
 };
 
+// --- Snake Game Instance ---
+// Note: Snake game uses vertical stacking (1080 width, 5760 height for 3 screens)
+const snakeGame = new SnakeGame(SCREEN_WIDTH, SCREEN_HEIGHT * SCREENS, 30);
+
 // --- Physics Loop (Server Side) ---
 // We run physics at a fixed rate (60 ticks/s) to ensure consistent simulation
 // regardless of server load or client frame rates.
@@ -91,6 +97,8 @@ let serverFrame = 0;
 
 setInterval(() => {
   updatePhysics();
+  snakeGame.update(1000 / TICK_RATE); // Update snake game with delta time
+
   // Broadcast the "Authoritative State" to all connected clients
 
   // OPTIMIZATION: Bandwidth Saving
@@ -110,6 +118,9 @@ setInterval(() => {
   };
 
   io.emit('state-update', publicState);
+
+  // Broadcast snake game state
+  io.emit('snake:state', snakeGame.getState());
 }, 1000 / TICK_RATE);
 
 function updatePhysics() {
@@ -249,8 +260,39 @@ io.on('connection', (socket) => {
     // No need to manual emit, the loop will catch it in <16ms
   });
 
+  socket.on('flyto', (data) => {
+    console.log('🚀 FlyTo Command:', data);
+    // Broadcast to all screens (visualizers) so they can react
+    io.emit('flyto', data);
+  });
+
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
+  });
+
+  // --- Snake Game Events ---
+  socket.on('snake:start', () => {
+    snakeGame.start();
+    console.log('🐍 Snake game started');
+  });
+
+  socket.on('snake:pause', () => {
+    snakeGame.pause();
+    console.log('⏸️ Snake game paused');
+  });
+
+  socket.on('snake:resume', () => {
+    snakeGame.resume();
+    console.log('▶️ Snake game resumed');
+  });
+
+  socket.on('snake:reset', () => {
+    snakeGame.reset();
+    console.log('🔄 Snake game reset');
+  });
+
+  socket.on('snake:input', (direction) => {
+    snakeGame.setNextDirection(direction);
   });
 });
 

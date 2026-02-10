@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LG Snake Game</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+      body {
+        background-color: #000;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      canvas {
+        background-color: #000;
+        display: block;
+      }
+
+      #debug {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #0f0;
+        font-family: monospace;
+        font-size: 14px;
+        text-shadow: 0 0 5px #0f0;
+        z-index: 10;
+      }
+
+      #score {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #0f0;
+        font-family: monospace;
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: 0 0 10px #0f0;
+        z-index: 10;
+      }
+
+      #gameOverlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.9);
+        border: 3px solid #0f0;
+        padding: 40px;
+        text-align: center;
+        display: none;
+        z-index: 20;
+      }
+
+      #gameOverlay h2 {
+        color: #0f0;
+        margin: 0 0 20px 0;
+        font-size: 36px;
+        text-shadow: 0 0 10px #0f0;
+      }
+
+      #gameOverlay p {
+        color: #0f0;
+        font-size: 18px;
+        margin: 10px 0;
+      }
+
+      .button-group {
+        margin-top: 20px;
+      }
+
+      button {
+        background: #0f0;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+
+      button:hover {
+        background: #0ff;
+        text-shadow: 0 0 5px #000;
+      }
+
+      button:active {
+        transform: scale(0.95);
+      }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+
+  <body>
+    <div id="debug">Screen: Loading...</div>
+    <div id="score">Score: 0</div>
+    <canvas id="canvas"></canvas>
+
+    <div id="gameOverlay">
+      <h2 id="overlayTitle">Game Over</h2>
+      <p id="overlayMessage">Final Score: 0</p>
+      <div class="button-group">
+        <button onclick="restartGame()">Restart</button>
+      </div>
+    </div>
+
+    <script type="module" src="./sketch.js"></script>
+  </body>
+</html>

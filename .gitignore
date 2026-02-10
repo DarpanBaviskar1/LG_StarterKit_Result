@@ -1,14 +1,82 @@
-node_modules
+# ===== FLUTTER BUILD FILES =====
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+
+# ===== IDE FILES =====
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# ===== OS FILES =====
 .DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# ===== PYTHON & VIRTUAL ENV =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+*.egg-info/
+dist/
+*.egg
+
+# ===== ENVIRONMENT & SECRETS (HIDE API KEYS) =====
+# NEVER commit .env file with actual API keys!
 .env
+.env.local
+.env.production.local
+.env.development.local
+
+# ===== LOGS =====
+*.log
+*.log.*
+
+# ===== TEMPORARY FILES =====
+*.tmp
+*.bak
+*~
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.idea
-.vscode
-*.swp
-*.swo
-dist
-coverage
+dist/
+coverage/
 sample_games/
-.V/
+.V/T
+
+# ===== IMPORTANT: EXPLICITLY INCLUDE .agent FOLDER =====
+!.agent/
+!.agent/**/*
+
+# ===== IMPORTANT: INCLUDE TEMPLATE FILES =====
+!.env.example
+!*.example.*
