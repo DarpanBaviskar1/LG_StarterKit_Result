@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" 
+     xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+  <name>{{TOUR_NAME}}</name>
+  
+  <!-- Animated tour -->
+  <gx:Tour>
+    <name>{{TOUR_NAME}}</name>
+    <gx:Playlist>
+      
+      <!-- Fly to the target location -->
+      <gx:FlyTo>
+        <gx:duration>{{DURATION}}</gx:duration>
+        <gx:flyToMode>smooth</gx:flyToMode>
+        <LookAt>
+          <longitude>{{LNG}}</longitude>
+          <latitude>{{LAT}}</latitude>
+          <altitude>{{ALT}}</altitude>
+          <heading>{{HEADING}}</heading>
+          <tilt>{{TILT}}</tilt>
+          <range>{{RANGE}}</range>
+          <gx:altitudeMode>relativeToGround</gx:altitudeMode>
+        </LookAt>
+      </gx:FlyTo>
+      
+      <!-- Wait at the location (optional) -->
+      <gx:Wait>
+        <gx:duration>2.0</gx:duration>
+      </gx:Wait>
+      
+    </gx:Playlist>
+  </gx:Tour>
+  
+  <!-- Optional: Add placemark at destination -->
+  <Placemark>
+    <name>{{NAME}}</name>
+    <description>{{DESCRIPTION}}</description>
+    <Point>
+      <coordinates>{{LNG}},{{LAT}},{{ALT}}</coordinates>
+    </Point>
+  </Placemark>
+  
+</Document>
+</kml>

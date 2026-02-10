@@ -19,11 +19,18 @@ Review the entire feature set for:
 - **Naming**: Are variable and event names descriptive and consistent with the codebase?
 
 ### 2. Technical Tooling Audit (Mandatory)
-You **MUST** run and verify the results of the following project tools:
+Depending on the project type (Node/JS or Flutter), you **MUST** run the appropriate tools:
+
+**For Node.js / Web:**
 - **Linting**: Run `npm run lint`. There should be zero errors.
 - **Type Safety**: Run `npm run check-types`. All JSDoc type-casts must be accurate.
 - **Logic Validation**: Run `npm run test`. All unit tests must pass.
-- **Test Coverage**: Run `npm run coverage`. New logic should have at least **80% coverage** to ensure maintainability.
+- **Test Coverage**: Run `npm run coverage`. New logic should have at least **80% coverage**.
+
+**For Flutter:**
+- **Analysis**: Run `flutter analyze`. Must return "No issues found".
+- **Formatting**: Run `dart format . --set-exit-if-changed`.
+- **Tests**: Run `flutter test`. All tests must pass.
 
 ### 3. Liquid Galaxy Specific Audit
 - **Sync Efficiency**: Are we sending too much data over Socket.io? (e.g., sending the whole state instead of just deltas).

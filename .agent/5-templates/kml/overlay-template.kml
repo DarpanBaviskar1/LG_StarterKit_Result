@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>{{OVERLAY_NAME}}</name>
+  
+  <!-- Screen Overlay for UI elements -->
+  <ScreenOverlay>
+    <name>{{OVERLAY_NAME}}</name>
+    <description>{{DESCRIPTION}}</description>
+    
+    <!-- Image to display -->
+    <Icon>
+      <href>{{IMAGE_URL}}</href>
+    </Icon>
+    
+    <!-- Position on screen -->
+    <!-- overlayXY: Position reference point on the overlay image -->
+    <!-- (0,0) = bottom-left, (1,1) = top-right, (0.5,0.5) = center -->
+    <overlayXY x="{{OVERLAY_X}}" y="{{OVERLAY_Y}}" xunits="fraction" yunits="fraction"/>
+    
+    <!-- screenXY: Where to place the overlay on the screen -->
+    <!-- (0,0) = bottom-left corner, (1,1) = top-right corner -->
+    <screenXY x="{{SCREEN_X}}" y="{{SCREEN_Y}}" xunits="fraction" yunits="fraction"/>
+    
+    <!-- Rotation reference point (usually same as overlayXY) -->
+    <rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+    
+    <!-- Size of the overlay -->
+    <!-- 0 = maintain original aspect ratio -->
+    <!-- fraction = percentage of screen -->
+    <!-- pixels = exact pixel size -->
+    <size x="{{SIZE_X}}" y="{{SIZE_Y}}" xunits="{{SIZE_X_UNITS}}" yunits="{{SIZE_Y_UNITS}}"/>
+    
+    <!-- Rotation angle (optional) -->
+    <rotation>0</rotation>
+    
+  </ScreenOverlay>
+  
+</Document>
+</kml>

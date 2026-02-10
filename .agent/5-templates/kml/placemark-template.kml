@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>{{NAME}}</name>
+  <description>{{DESCRIPTION}}</description>
+  
+  <!-- Define marker style -->
+  <Style id="defaultStyle">
+    <IconStyle>
+      <color>ff0000ff</color>
+      <scale>1.0</scale>
+      <Icon>
+        <href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href>
+      </Icon>
+    </IconStyle>
+    <LabelStyle>
+      <color>ffffffff</color>
+      <scale>1.0</scale>
+    </LabelStyle>
+    <BalloonStyle>
+      <text>
+        <![CDATA[
+          <h3>$[name]</h3>
+          <p>$[description]</p>
+        ]]>
+      </text>
+    </BalloonStyle>
+  </Style>
+  
+  <!-- Placemark for the location -->
+  <Placemark>
+    <name>{{NAME}}</name>
+    <description>
+      <![CDATA[
+        <p>{{DESCRIPTION}}</p>
+        <p><b>Coordinates:</b> {{LAT}}, {{LNG}}</p>
+      ]]>
+    </description>
+    <styleUrl>#defaultStyle</styleUrl>
+    <Point>
+      <coordinates>{{LNG}},{{LAT}},{{ALT}}</coordinates>
+    </Point>
+  </Placemark>
+</Document>
+</kml>
