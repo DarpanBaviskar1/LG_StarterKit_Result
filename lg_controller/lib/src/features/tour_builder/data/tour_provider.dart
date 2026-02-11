@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:lg_controller/src/features/settings/data/settings_service.dart';
@@ -5,14 +6,14 @@ import '../domain/models/tour.dart';
 import 'tour_service.dart';
 import 'gemini_service.dart';
 
+
 final tourServiceProvider = Provider<TourService>((ref) {
   final prefs = ref.watch(sharedPreferencesProvider);
   return TourService(prefs);
 });
 
 final geminiServiceProvider = Provider<GeminiService>((ref) {
-  // IMPORTANT: Replace with your actual Gemini API key
-  const apiKey = 'AIzaSyAc09uhbYU7vZm3RixbVeHoPJ3KskqIXPU';
+  final apiKey = dotenv.env['GOOGLE_API_KEY'] ?? '';
   return GeminiService(apiKey: apiKey);
 });
 
